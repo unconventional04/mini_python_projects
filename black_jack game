@@ -1,0 +1,64 @@
+play = input('Do you want to play blackjack? y/n: ').lower()
+card_number = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def black_jack():
+    h_number = []
+    c_number = []
+    first_h_num = random.choice(card_number)
+    second_h_num = random.choice(card_number)
+    h_number.append(first_h_num)
+    h_number.append(second_h_num)
+    print(f"This is your number: {h_number}")
+    first_c_num = random.randint(2, 11)
+    second_c_num = random.randint(2, 11)
+    c_number.append(first_c_num)
+    c_number.append(second_c_num)
+    print(f"This is the computer's first number: {first_c_num}")
+    question = input("Do you want to pick a third number? y/n: ").lower()
+    if question == "y":
+        third_h_num = random.choice(card_number)
+        h_number.append(third_h_num)
+        print(c_number)
+        print(h_number)
+        h = 0
+        c = 0
+        for i in h_number:
+            h += i
+        for i in c_number:
+            c += i
+        if c < 17:
+            third_c_num = random.choice(card_number)
+            c = c + third_c_num
+        print(f"Final human number: {h_number}")
+        print(f"Final computer number: {c_number}")
+        if c < h:
+            if h <= 21:
+                print("Yayyy!!! You won")
+        elif c > h:
+            print("Oops. You lost")
+    elif question == "n":
+        h = 0
+        c = 0
+        for i in h_number:
+            h += i
+        for i in c_number:
+            c += i
+        print(f"Final human number: {h_number}")
+        print(f"Final computer number: {c_number}")
+        if c < h:
+            if h <= 21:
+                print("Yayyy!!! You won")
+        elif c > h:
+            print("Oops. You lost")
+
+
+if play == "y":
+    black_jack()
+replay = False
+while not replay:
+    replay_q = input("Do you want to go again? y/n: ")
+    if replay_q == "y":
+        black_jack()
+    elif replay_q == "n":
+        print("Thanks for playing BlackJack")
+        replay = True
