@@ -1,0 +1,50 @@
+
+def Ceasar_Cipher():
+    print("Hello. Welcome to the Ceasar Cipher")
+    question = input("encode or decode? ").lower()
+    while question != " ":
+        question = input("encode or decode?\n ").lower()
+        break
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+                'v', 'w', 'x', 'y', 'z', ' ', '/', '.', '@']
+    word = input("Enter the word/sentence you want to work on:\n ").lower()
+    shift_value = int(input("Enter your shift value:\n "))
+    blanks = ["_"] * len(word)
+
+    word_list = list(word)
+
+    def encode():
+        position = -1
+        word_list = list(word)
+        for i in word_list:
+            position += 1
+            loc = alphabet.index(i)
+            t = alphabet[(loc + shift_value) % 30]
+            blanks[position] = t
+            final_code = "".join(blanks)
+        print(f"The encoded message is {final_code}")
+
+    def decode():
+        position = -1
+        for i in word_list:
+            position += 1
+            loc = alphabet.index(i)
+            t = alphabet[(loc - shift_value) % 30]
+            blanks[position] = t
+            final_code = "".join(blanks)
+        print(f"the decoded message is {final_code}")
+
+    if question == "encode":
+        encode()
+    elif question == "decode":
+        decode()
+
+
+end_game = False
+repeat = input("Do you want to use the Ceasae Cipher again? yes or no  ").lower()
+while not end_game:
+    if repeat == "yes":
+        Ceasar_Cipher()
+    elif repeat == "no":
+        print("Thanks for using the Ceasar Cipher")
+        end_game = True
