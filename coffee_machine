@@ -1,0 +1,98 @@
+coffee_ingredients = [
+    {
+        "name": "Espresso",
+        "water": 50,
+        "coffee": 18,
+        "milk": 0,
+        "price": 1.50,
+    },
+    {
+        "name": "Latte",
+        "water": 200,
+        "coffee": 24,
+        "milk": 150,
+        "price": 2.50
+    },
+    {
+        "name": "Cappucino",
+        "water": 250,
+        "coffee": 24,
+        "milk": 100,
+        "price": 3.00,
+    }
+]
+coffee_inital_resources = {"water": 300, "milk": 200, "coffee": 100, "profit($)": 0}
+
+
+def coffee_machine():
+    question = input("What type of coffee do you want? (espresso, latte, cappucino): ").lower()
+    penny = int(input("Enter the number of pennies: "))
+    nickel = int(input("Enter the number of nickels: "))
+    dime = int(input("Enter the number of dimes: "))
+    quarter = int(input("Enter the nuumber of quarters: "))
+    money = (penny * 1) + (dime * 10) + (nickel * 5) + (quarter * 25)
+    money = money / 100
+    if question == "espresso":
+        if money < 1.5:
+            print(f"Insufficient money: {money}")
+        elif money >= 1.5:
+            change = money - 1.5
+            if coffee_inital_resources["water"] >= coffee_ingredients[0]["water"] and coffee_inital_resources[
+                "coffee"] >= coffee_ingredients[0]["coffee"]:
+                coffee_inital_resources["water"] -= coffee_ingredients[0]["water"]
+                coffee_inital_resources["coffee"] -= coffee_ingredients[0]["coffee"]
+                coffee_inital_resources["profit($)"] += 1.5
+                print(f"Here is your espresso and your change: ${change}")
+            elif coffee_inital_resources["water"] < coffee_ingredients[0]["water"] and coffee_inital_resources[
+                "coffee"] < coffee_ingredients[0]["coffee"]:
+                print("Insufficient resources for this. Money has been refunded")
+                exit()
+    elif question == "latte":
+        if money < 2.5:
+            print("Insufficient money")
+        elif money >= 2.5:
+            change = money - 2.5
+            if coffee_inital_resources["water"] >= coffee_ingredients[1]["water"] and coffee_inital_resources["milk"] >= \
+                    coffee_ingredients[1]["milk"] and coffee_inital_resources["coffee"] >= coffee_ingredients[1][
+                "coffee"]:
+                coffee_inital_resources["water"] -= coffee_ingredients[1]["water"]
+                coffee_inital_resources["milk"] -= coffee_ingredients[1]["milk"]
+                coffee_inital_resources["profit($)"] += 2.5
+                print(f"Here is your Latte and your change: ${change}")
+            elif coffee_inital_resources["water"] < coffee_ingredients[1]["water"] and coffee_inital_resources["milk"] < \
+                    coffee_ingredients[1]["milk"] and coffee_inital_resources["coffee"] < coffee_ingredients[1][
+                "coffee"]:
+                print("Insufficient resources for this. Money has been refunded")
+                exit()
+    elif question == "cappucino":
+        if money < 2.5:
+            print("Insufficient money")
+        elif money >= 2.5:
+            change = money - 2.5
+            if coffee_inital_resources["water"] >= coffee_ingredients[2]["water"] and coffee_inital_resources["milk"] >= \
+                    coffee_ingredients[2]["milk"] and coffee_inital_resources["coffee"] >= coffee_ingredients[2][
+                "coffee"]:
+                coffee_inital_resources["water"] -= coffee_ingredients[2]["water"]
+                coffee_inital_resources["milk"] -= coffee_ingredients[2]["milk"]
+                coffee_inital_resources["coffee"] -= coffee_ingredients[2]["coffee"]
+                coffee_inital_resources["profit($)"] += 3.0
+                print(f"Here is your Cappucino and your change: ${change}")
+            elif coffee_inital_resources["water"] < coffee_ingredients[2]["water"] and coffee_inital_resources["milk"] < \
+                    coffee_ingredients[2]["milk"] and coffee_inital_resources["coffee"] < coffee_ingredients[2][
+                "coffee"]:
+                print("Insufficient resources for this. Money has been refunded")
+                exit()
+    elif question == "report":
+        for k, v in coffee_inital_resources.items():
+            print(k, v)
+
+
+coffee_machine()
+replay = False
+while not replay:
+    replay_q = input("Do you want to off or continue with the machine(off to stop, on to continue): ").lower()
+    if replay_q == "on":
+        coffee_machine()
+    elif replay_q == "off":
+        print("Thanks for using the Coffee machine")
+        replay = True
