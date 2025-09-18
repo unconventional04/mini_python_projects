@@ -1,6 +1,9 @@
 import random
-play = input('Do you want to play blackjack? y/n: ').lower()
+
+play= input('Do you want to play blackjack? y/n: ').lower()
+print()
 card_number = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
 
 def black_jack():
     h_number = []
@@ -15,7 +18,9 @@ def black_jack():
     c_number.append(first_c_num)
     c_number.append(second_c_num)
     print(f"This is the computer's first number: {first_c_num}")
+    print()
     question = input("Do you want to pick a third number? y/n: ").lower()
+    print()
     if question == "y":
         third_h_num = random.choice(card_number)
         h_number.append(third_h_num)
@@ -32,11 +37,19 @@ def black_jack():
             c = c + third_c_num
         print(f"Final human number: {h_number}")
         print(f"Final computer number: {c_number}")
+        print()
         if c < h:
             if h <= 21:
-                print("Yayyy!!! You won")
+                print("Blackjack! You beat the dealer.")
+            elif h > 21:
+                print("You busted, better luck next time.")
         elif c > h:
-            print("Oops. You lost")
+            if c > 21:
+                print("Blackjack! You beat the dealer.")
+            elif c < 21:
+                print("You busted, better luck next time.")
+        elif c == h:
+            print("Push — nobody wins.")
     elif question == "n":
         h = 0
         c = 0
@@ -46,20 +59,25 @@ def black_jack():
             c += i
         print(f"Final human number: {h_number}")
         print(f"Final computer number: {c_number}")
-        if c < h:
+        print()
+        if h == 21:
+            print("Blackjack! You beat the dealer.")
+        elif c < h:
             if h <= 21:
-                print("Yayyy!!! You won")
+                print("Blackjack! You beat the dealer.")
+            elif h > 21:
+                print("You busted, better luck next time.")
         elif c > h:
-            print("Oops. You lost")
+            print("You busted, better luck next time.")
 
 
 if play == "y":
     black_jack()
 replay = False
 while not replay:
+    print()
     replay_q = input("Do you want to go again? y/n: ")
     if replay_q == "y":
         black_jack()
     elif replay_q == "n":
-        print("Thanks for playing BlackJack")
-        replay = True
+        print("Thanks for playing BlackJack!")
