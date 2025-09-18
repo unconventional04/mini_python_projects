@@ -1,0 +1,46 @@
+
+# Rock, Paper & Scissors Game
+import random
+
+print('Welcome to the Rock, Paper and Scissors Game')
+question = input("Pick one of Rock, Paper and Scissors? R for Rock, P for Paper and S for Scissors \n")
+print()
+game_list = list()
+game_list.append("Rock")
+game_list.append("Paper")
+game_list.append("Scissors")
+random_pick = random.choice(game_list)
+
+
+def rock_paper_scissors_game():
+    if question == "R" and random_pick == "Rock":
+        print("Rock, Rock. It's a tie")
+    elif question == "R" and random_pick == "Paper":
+        print("Rock, Paper. You lost! Better luck next time...")
+    elif question == "R" and random_pick == "Scissors":
+        print("Rock, Scissors. You won. Whooosh")
+    elif question == "P" and random_pick == "Rock":
+        print("Paper, Rock, it is. You won. Whooosh")
+    elif question == "P" and random_pick == "Paper":
+        print("Paper, Paper. It's a tie!")
+    elif question == "P" and random_pick == "Scissors":
+        print("Paper, Scissors. You lost! Better luck next time...")
+    elif question == "S" and random_pick == "Scissors":
+        print("Scissors, Scissors. It's a tie!")
+    elif question == "S" and random_pick == "Paper":
+        print("Scissors, Paper. You won! Whooosh")
+    elif question == "S" and random_pick == "Rock":
+        print("Scissors, Rock. You lost! Better luck next time...!")
+
+
+rock_paper_scissors_game()
+is_playing = False
+while not is_playing:
+    replay = input("Do you want to play again? Yes Or No ")
+    if replay == "Yes":
+        question = input("Pick one of Rock, Paper and Scissors? R for Rock, P for Paper and S for Scissors ")
+        print()
+        rock_paper_scissors_game()
+    if replay == "No":
+        print("Thank you for playing the rock, paper, scissors game. See you soon")
+        is_playing = True
