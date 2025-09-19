@@ -1,0 +1,32 @@
+import turtle as t
+import random
+screen=t.Screen()
+screen.setup(600, 600)
+screen.setworldcoordinates(-500, -500, 500, 500)
+y_ordinates=[-70, -40, 10, 30, 70]
+bet= screen.textinput("Make a bet", "Which turtle will win the race? ")
+index=0
+forward_speed=random.randint(0, 10)
+color=["red", "orange", "green", "blue", "yellow"]
+turtle_list=[]
+is_moving= True
+for i in range(5):
+        new_turtle=t.Turtle("turtle")
+        new_turtle.penup()
+        new_turtle.goto(x=-500, y=y_ordinates[index])
+        new_turtle.color(color[index])
+        index  += 1
+        turtle_list.append(new_turtle)
+
+while is_moving:
+        for turtle in turtle_list:
+                if turtle.xcor() > 500:
+                        winning_color = turtle.pencolor()
+                        is_moving= False
+                        if winning_color == bet:
+                                print(f"You won! The {winning_color} turtle won")
+                        elif winning_color != bet:
+                                print(f"You lost! The {winning_color} turtle won")
+                size_gap=random.randint(0, 10)
+                turtle.forward(size_gap)
+screen.exitonclick()
