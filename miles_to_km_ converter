@@ -1,0 +1,35 @@
+from tkinter import *
+window = Tk()
+window.title("Miles to Km Converter")
+window.minsize(250,100)
+window.config(padx=50, pady=10)
+
+
+label1=Label(text="Miles", font=("Arial", 20))
+label1.grid(row=1, column=1)
+
+label2=Label(text="Km", font=("Arial", 20))
+label2.grid(row=2, column=1)
+
+
+entry=Entry()
+entry.grid(column=2, row=1)
+def convert():
+    num = entry.get()
+    km_num= int(num) * 1.60
+    label3["text"]=round(km_num,3)
+
+button=Button(text="Convert", font=("Arial", 20), command=convert)
+button.grid(column=2, row=3)
+label3=Label(text=0, font=("Arial", 20))
+label3.grid(row=2, column=2)
+
+
+
+
+
+
+
+
+
+window.mainloop()
