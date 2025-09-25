@@ -1,0 +1,25 @@
+import datetime as dt
+import pandas as pd
+import smtplib
+date_of_birth={}
+emails={}
+random_people = pd.read_csv("random_people.csv")
+for index, row in random_people.iterrows():
+    date_of_birth[row.Name]=str(row.Year_of_Birth) + "-" + str(row.Month_of_Birth).zfill(2) + "-" + str(row.Day_of_Birth).zfill(2)
+    emails[row.Name]=row.Email
+with open("birthday_message", "r") as f:
+    birthday_message=f.read()
+now=dt.datetime.now()
+date=now.date()
+date=str(date)
+for (k, v) in date_of_birth.items():
+    if date == v:
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            my_email = "oyeludeferanmi@gmail.com"
+            password = "###########"
+            connection.starttls()
+            connection.login(user=my_email, password=password)
+            connection.sendmail(
+                from_addr=my_email,
+                to_addrs= emails[k],
+                msg=f"Subject:Thursday Motivational Quote \n\n {birthday_message}"
